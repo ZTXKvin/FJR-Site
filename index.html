@@ -1,0 +1,247 @@
+from flask import Flask, render_template_string
+
+app = Flask(__name__)
+
+HTML = """
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Sophia ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        -45deg,
+        #ff9a9e,
+        #fad0c4,
+        #ffd1ff,
+        #ffc3a0
+    );
+
+    background-size:400% 400%;
+    animation:fundo 10s ease infinite;
+}
+
+@keyframes fundo{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.card{
+    background:rgba(255,255,255,0.95);
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    max-width:650px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,0.2);
+}
+
+h1{
+    color:#ff4081;
+    margin-bottom:15px;
+}
+
+p{
+    color:#555;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+h2{
+    color:#ff4081;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    position:relative;
+}
+
+button{
+    border:none;
+    padding:15px 35px;
+    border-radius:50px;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+#bonita{
+    background:#ff80ab;
+    color:white;
+    position:relative;
+}
+
+#linda{
+    background:#ff4081;
+    color:white;
+}
+
+#resultado{
+    margin-top:30px;
+    font-size:24px;
+    color:#ff4081;
+    font-weight:bold;
+}
+
+.coracao{
+    position:absolute;
+    animation:subir 5s linear forwards;
+}
+
+@keyframes subir{
+    0%{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>✨ Para Sophia ✨</h1>
+
+<p>
+Depois de uma análise extremamente cuidadosa,
+cheguei a uma dúvida muito importante...
+❤️
+</p>
+
+<h2>
+Sophia, você está bonita ou linda hoje?
+</h2>
+
+<div class="buttons">
+
+<button id="bonita" onclick="bonita()">
+😍 Bonita
+</button>
+
+<button id="linda" onclick="linda()">
+❤️ Linda
+</button>
+
+</div>
+
+<div id="resultado"></div>
+
+</div>
+
+<script>
+
+const botaoBonita =
+document.getElementById("bonita");
+
+botaoBonita.addEventListener("mouseover",()=>{
+
+    const x =
+    Math.random()*200-100;
+
+    const y =
+    Math.random()*120-60;
+
+    botaoBonita.style.transform =
+    `translate(${x}px,${y}px)`;
+
+});
+
+function bonita(){
+
+    document.getElementById("resultado")
+    .innerHTML=
+    "Sophia, bonita? Pode até ser... mas eu ainda acho que você está linda. ✨❤️";
+
+}
+
+function linda(){
+
+    document.getElementById("resultado")
+    .innerHTML=
+    "Eu sabia, Sophia! 😍❤️ Você está simplesmente maravilhosa hoje.";
+
+    explosao();
+}
+
+function criarCoracao(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.classList.add("coracao");
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=
+    Math.random()*100+"vw";
+
+    heart.style.fontSize=
+    (20+Math.random()*40)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },5000);
+}
+
+function explosao(){
+
+    for(let i=0;i<50;i++){
+
+        setTimeout(()=>{
+            criarCoracao();
+        },i*50);
+
+    }
+
+}
+
+setInterval(criarCoracao,300);
+
+</script>
+
+</body>
+</html>
+"""
+
+@app.route("/")
+def home():
+    return render_template_string(HTML)
+
+if __name__ == "__main__":
+    app.run(debug=True)
