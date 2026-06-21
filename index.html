@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Para Sophia ❤️</title>
+<title>Para Sophia 🖤</title>
 
 <style>
 
@@ -24,14 +24,14 @@ body{
 
     background:linear-gradient(
         -45deg,
-        #ff9a9e,
-        #fad0c4,
-        #ffd1ff,
-        #ffc3a0
+        #000000,
+        #111111,
+        #1a001a,
+        #2b002b
     );
 
     background-size:400% 400%;
-    animation:fundo 10s ease infinite;
+    animation:fundo 12s ease infinite;
 }
 
 @keyframes fundo{
@@ -41,85 +41,98 @@ body{
 }
 
 .card{
-    background:rgba(255,255,255,0.95);
-    padding:40px;
+    background:rgba(15,15,15,0.92);
+    border:1px solid #5e35b1;
+
+    padding:45px;
     border-radius:25px;
+
+    max-width:700px;
     text-align:center;
-    max-width:650px;
 
     box-shadow:
-    0 15px 35px rgba(0,0,0,0.2);
+    0 0 30px rgba(179,136,255,.25),
+    0 0 60px rgba(179,136,255,.15);
 }
 
 h1{
-    color:#ff4081;
-    margin-bottom:15px;
+    color:#b388ff;
+    margin-bottom:20px;
+    font-size:40px;
 }
 
 p{
-    color:#555;
+    color:#d0d0d0;
     font-size:18px;
-    margin-bottom:20px;
+    line-height:1.7;
+    margin-bottom:25px;
 }
 
 h2{
-    color:#ff4081;
+    color:white;
+    font-size:28px;
 }
 
 .buttons{
-    margin-top:30px;
+    margin-top:35px;
     display:flex;
     justify-content:center;
     gap:20px;
-    position:relative;
 }
 
 button{
     border:none;
-    padding:15px 35px;
+    padding:16px 35px;
     border-radius:50px;
-    font-size:20px;
     cursor:pointer;
+    font-size:18px;
     transition:.3s;
 }
 
 button:hover{
-    transform:scale(1.1);
+    transform:scale(1.08);
 }
 
 #bonita{
-    background:#ff80ab;
+    background:#2b2b2b;
     color:white;
-    position:relative;
 }
 
 #linda{
-    background:#ff4081;
+    background:#5e35b1;
     color:white;
 }
 
 #resultado{
     margin-top:30px;
     font-size:24px;
-    color:#ff4081;
+    color:#b388ff;
     font-weight:bold;
 }
 
-.coracao{
+.simbolo{
     position:absolute;
-    animation:subir 5s linear forwards;
+    animation:subir 7s linear forwards;
+    pointer-events:none;
 }
 
 @keyframes subir{
+
     0%{
-        transform:translateY(100vh);
+        transform:translateY(110vh) rotate(0deg);
         opacity:1;
     }
 
     100%{
-        transform:translateY(-120vh);
+        transform:translateY(-120vh) rotate(360deg);
         opacity:0;
     }
+}
+
+.frase{
+    margin-top:15px;
+    color:#9e9e9e;
+    font-style:italic;
 }
 
 </style>
@@ -129,26 +142,30 @@ button:hover{
 
 <div class="card">
 
-<h1>✨ Para Sophia ✨</h1>
+<h1>🌙 Para Sophia 🖤</h1>
 
 <p>
-Depois de uma análise extremamente cuidadosa,
-cheguei a uma dúvida muito importante...
-❤️
+Sophia, depois de uma análise extremamente cuidadosa,
+algumas noites sem dormir e uma quantidade questionável
+de pensamentos aleatórios...
 </p>
 
 <h2>
-Sophia, você está bonita ou linda hoje?
+Você está linda ou absolutamente deslumbrante hoje? 🥀
 </h2>
+
+<p class="frase">
+(Escolha com sabedoria...)
+</p>
 
 <div class="buttons">
 
 <button id="bonita" onclick="bonita()">
-😍 Bonita
+🥀 Linda
 </button>
 
 <button id="linda" onclick="linda()">
-❤️ Linda
+🖤 Deslumbrante
 </button>
 
 </div>
@@ -159,77 +176,60 @@ Sophia, você está bonita ou linda hoje?
 
 <script>
 
-const botaoBonita =
-document.getElementById("bonita");
-
-botaoBonita.addEventListener("mouseover",()=>{
-
-    const x =
-    Math.random()*200-100;
-
-    const y =
-    Math.random()*120-60;
-
-    botaoBonita.style.transform =
-    `translate(${x}px,${y}px)`;
-
-});
-
 function bonita(){
 
-    document.getElementById("resultado")
-    .innerHTML=
-    "Sophia, bonita? Pode até ser... mas eu ainda acho que você está linda. ✨❤️";
-
+    document.getElementById("resultado").innerHTML =
+    "Sophia... linda? Talvez. Mas meus olhos ainda insistem que você está deslumbrante. 🖤";
 }
 
 function linda(){
 
-    document.getElementById("resultado")
-    .innerHTML=
-    "Eu sabia, Sophia! 😍❤️ Você está simplesmente maravilhosa hoje.";
+    document.getElementById("resultado").innerHTML =
+    "Eu sabia. 🌙🥀 Você está absolutamente deslumbrante hoje, Sophia.";
 
     explosao();
 }
 
-function criarCoracao(){
+function criarSimbolo(){
 
-    const heart =
+    const simbolos =
+    ["🖤","🥀","🌙","🦇","⛓️"];
+
+    const item =
     document.createElement("div");
 
-    heart.classList.add("coracao");
+    item.classList.add("simbolo");
 
-    heart.innerHTML="❤️";
+    item.innerHTML =
+    simbolos[Math.floor(Math.random()*simbolos.length)];
 
-    heart.style.left=
-    Math.random()*100+"vw";
+    item.style.left =
+    Math.random()*100 + "vw";
 
-    heart.style.fontSize=
-    (20+Math.random()*40)+"px";
+    item.style.fontSize =
+    (20 + Math.random()*35) + "px";
 
-    document.body.appendChild(heart);
+    document.body.appendChild(item);
 
     setTimeout(()=>{
-        heart.remove();
-    },5000);
+        item.remove();
+    },7000);
 }
 
 function explosao(){
 
-    for(let i=0;i<50;i++){
+    for(let i=0;i<60;i++){
 
         setTimeout(()=>{
-            criarCoracao();
-        },i*50);
+            criarSimbolo();
+        },i*40);
 
     }
-
 }
 
-setInterval(criarCoracao,300);
+setInterval(criarSimbolo,500);
 
 </script>
 
 </body>
 </html>
-"""
